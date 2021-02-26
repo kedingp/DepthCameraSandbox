@@ -62,3 +62,7 @@ target_link_libraries(ParcelLocator DepthCameraSandbox)
 SET_TARGET_PROPERTIES(ParcelLocator PROPERTIES
     FOLDER "exe"
     )
+
+# Configure GTest
+# =============================================================================
+ADD_SUBDIRECTORY(tests)

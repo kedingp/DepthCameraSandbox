@@ -5,8 +5,6 @@
 #include <iostream>
 
 #pragma warning(push, 0)
-#include <librealsense2/rs.hpp>
-#include <opencv2/core/utility.hpp>
 #include <opencv2/opencv.hpp>
 #pragma warning(pop)
 
