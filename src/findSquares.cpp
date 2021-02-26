@@ -1,12 +1,14 @@
 #include "findSquares.h"
-#include <iostream>
 
+#include <iostream>
 #include <opencv2/opencv.hpp>
 
 using namespace cv;
 using namespace std;
 
-static void showImage(Mat image, const std::string displayName)
+namespace
+{
+void showImage(Mat image, const std::string displayName)
 {
     const auto window_name = displayName;
     cv::namedWindow(window_name, cv::WINDOW_AUTOSIZE);
@@ -15,25 +17,10 @@ static void showImage(Mat image, const std::string displayName)
     cv::waitKey(1);
 }
 
-static void help(const char* programName)
-{
-    cout << "\nA program using pyramid scaling, Canny, contours and contour simplification\n"
-            "to find squares in a list of images (pic1-6.png)\n"
-            "Returns sequence of squares detected on the image.\n"
-            "Call:\n"
-            "./"
-         << programName
-         << " [file_name (optional)]\n"
-            "Using OpenCV version "
-         << CV_VERSION << "\n"
-         << endl;
-}
-int thresh = 50, N = 11;
-const char* wndname = "Square Detection Demo";
 // helper function:
 // finds a cosine of angle between vectors
 // from pt0->pt1 and from pt0->pt2
-static double angle(Point pt1, Point pt2, Point pt0)
+double angle(Point pt1, Point pt2, Point pt0)
 {
     double dx1 = pt1.x - pt0.x;
     double dy1 = pt1.y - pt0.y;
@@ -41,6 +28,11 @@ static double angle(Point pt1, Point pt2, Point pt0)
     double dy2 = pt2.y - pt0.y;
     return (dx1 * dx2 + dy1 * dy2) / sqrt((dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
 }
+} // namespace
+
+int thresh = 50, N = 11;
+const char* wndname = "Square Detection Demo";
+
 // returns sequence of squares detected on the image.
 void findSquares(const Mat& image, vector<vector<Point> >& squares)
 {

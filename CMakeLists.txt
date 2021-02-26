@@ -45,11 +45,20 @@ target_link_libraries(DepthCameraSandbox
     realsense2::realsense2
     )
 set_target_properties(DepthCameraSandbox PROPERTIES LINKER_LANGUAGE CXX)
+SET_TARGET_PROPERTIES(DepthCameraSandbox PROPERTIES
+    FOLDER "lib"
+    )
 
 add_executable (FrameRecorder "apps/frameRecorder3D.cpp")
 target_include_directories(FrameRecorder PRIVATE include)
 target_link_libraries(FrameRecorder DepthCameraSandbox)
+SET_TARGET_PROPERTIES(FrameRecorder PROPERTIES
+    FOLDER "exe"
+    )
 
 add_executable (ParcelLocator "apps/parcelLocator.cpp")
 target_include_directories(ParcelLocator PRIVATE include)
 target_link_libraries(ParcelLocator DepthCameraSandbox)
+SET_TARGET_PROPERTIES(ParcelLocator PROPERTIES
+    FOLDER "exe"
+    )

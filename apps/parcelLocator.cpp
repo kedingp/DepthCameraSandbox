@@ -3,8 +3,10 @@
 #include <chrono>
 #include <iostream>
 
+#pragma warning(push, 0)
 #include <librealsense2/rs.hpp>
 #include <opencv2/opencv.hpp>
+#pragma warning(pop)
 
 #include "CameraInterface.h"
 #include "DepthCamera.h"

@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 
+#pragma warning(push, 0)
+#include <opencv2/opencv.hpp>
+#pragma warning(pop)
+
 #include "Frame3D.h"
 #include "ParcelLocator.h"
 #include "findSquares.h"
@@ -20,7 +24,7 @@ class ParcelLocatorAlgo : public ParcelLocator<ParcelLocatorAlgo, camera::Frame3
 private:
     Parcel findParcelImpl(const camera::Frame3D& inputFrame)
     {
-        std::vector<std::vector<cv::Point> > squares;
+        std::vector<std::vector<cv::Point>> squares;
         findSquares(inputFrame.color_image, squares);
 
         Parcel result;
@@ -35,15 +39,6 @@ private:
             }
         }
 
-        /*const auto image = inputFrame.color_image;
-
-        cv::Mat grayScaleImage;
-
-        cv::cvtColor(image, grayScaleImage, cv::COLOR_RGB2GRAY);*/
-        /*const auto window_name = "Display grayscale Image";
-        cv::namedWindow(window_name, cv::WINDOW_AUTOSIZE);
-        cv::waitKey(0);
-        cv::imshow(window_name, grayScaleImage);*/
         return result;
     }
     friend ParcelLocator;

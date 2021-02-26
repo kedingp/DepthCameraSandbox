@@ -1,6 +1,9 @@
 #pragma once
-#include <opencv2/opencv.hpp>
 #include <string>
+
+#pragma warning(push, 0)
+#include <opencv2/opencv.hpp>
+#pragma warning(pop)
 
 namespace camera
 {
