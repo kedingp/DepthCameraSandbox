@@ -22,10 +22,12 @@ add_executable(unit_tests
 
 
 target_link_libraries(unit_tests PUBLIC
-    ${CMAKE_PROJECT_NAME}
+    DepthCameraSandbox
     GTest::gtest
     GTest::gtest_main
     )
+
+target_include_directories(unit_tests PRIVATE ../include)
 
 SET_TARGET_PROPERTIES(unit_tests PROPERTIES
     FOLDER "tests"

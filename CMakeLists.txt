@@ -2,10 +2,22 @@
 
 project("DepthCameraSandbox")
 
+# Use C++ 20 standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Export all symbols of dlls (important for windows)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+# Output all binaries, object and lib files in the same folder, respectively
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/obj)
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+
+# Enable folder structure in IDE, eg. Visual Studio
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# Compile with highest warning level and put it out in command line
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
 message ("cxx Flags:" ${CMAKE_CXX_FLAGS})
 
@@ -63,6 +75,6 @@ SET_TARGET_PROPERTIES(ParcelLocator PROPERTIES
     FOLDER "exe"
     )
 
-# Configure GTest
+# Add tests
 # =============================================================================
 ADD_SUBDIRECTORY(tests)
