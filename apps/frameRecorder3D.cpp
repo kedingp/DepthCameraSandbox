@@ -29,14 +29,14 @@ int main()
     }
     std::filesystem::create_directory(finalPath);
 
-    for (auto frame = std::make_unique<const camera::Frame3D>(); cv::waitKey(0) != 32;) {
+    for (std::unique_ptr<const camera::Frame3D> frame; cv::waitKey(0) != 32;) {
         frame = depthCamera.grabFrame();
 
         frame->write(finalPath);
 
-        cv::imshow(window_name, frame->depth_image);
-        cv::imshow(color_window_name, frame->color_image);
-        std::cout << "Frame id is: " << frame->id << '\n';
+        cv::imshow(window_name, frame->getDepthImage());
+        cv::imshow(color_window_name, frame->getColorImage());
+        std::cout << "Frame id is: " << frame->getId() << '\n';
     }
 
     return EXIT_SUCCESS;

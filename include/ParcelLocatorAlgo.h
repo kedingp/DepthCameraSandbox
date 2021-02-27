@@ -25,7 +25,7 @@ private:
     Parcel findParcelImpl(const camera::Frame3D& inputFrame)
     {
         std::vector<std::vector<cv::Point>> squares;
-        findSquares(inputFrame.color_image, squares);
+        findSquares(inputFrame.getColorImage(), squares);
 
         Parcel result;
         result.depth = 0.;

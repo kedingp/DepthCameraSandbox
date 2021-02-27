@@ -43,7 +43,7 @@ TEST_F(DepthCameraTest, grabFrame)
 
     // Assert
     ASSERT_TRUE(frame != nullptr);
-    ASSERT_EQ(frame->id, 0);
+    ASSERT_EQ(frame->getId(), 0);
 }
 
 } // namespace

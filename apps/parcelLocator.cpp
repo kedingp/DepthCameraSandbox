@@ -23,16 +23,17 @@ int main()
     cv::namedWindow(color_window_name, cv::WINDOW_AUTOSIZE);
 
     for (auto [frame, parcelLocator] =
-             std::tuple(std::make_unique<const camera::Frame3D>(), parcel_locator::ParcelLocatorAlgo());
+             std::make_tuple<std::unique_ptr<const camera::Frame3D>, parcel_locator::ParcelLocatorAlgo>(
+                 nullptr, parcel_locator::ParcelLocatorAlgo());
          cv::waitKey(0) != 32;) {
         frame = depthCamera.grabFrame();
 
         const auto parcel = parcelLocator.findParcel(*frame);
-        cv::polylines(frame->color_image, parcel.topCorners, true, cv::Scalar(0, 255, 0), 3, cv::LINE_AA);
+        cv::polylines(frame->getColorImage(), parcel.topCorners, true, cv::Scalar(0, 255, 0), 3, cv::LINE_AA);
 
-        cv::imshow(window_name, frame->depth_image);
-        cv::imshow(color_window_name, frame->color_image);
-        std::cout << "Frame id is: " << frame->id << '\n';
+        cv::imshow(window_name, frame->getDepthImage());
+        cv::imshow(color_window_name, frame->getColorImage());
+        std::cout << "Frame id is: " << frame->getId() << '\n';
     }
 
     return EXIT_SUCCESS;
